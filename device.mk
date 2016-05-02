@@ -257,14 +257,31 @@ ADDITIONAL_BUILD_PROPERTIES += persist.nfc.smartcard.config=SIM1,SIM2,eSE1
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libdivxdrmdecrypt \
+    libdashplayer \
     libOmxAacEnc \
+    libOmxAc3HwDec \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
+    libOmxMp3Dec \
     libOmxQcelp13Enc \
+    libOmxSwVdec \
+    libOmxSwVencMpeg4 \
     libOmxVdec \
+    libOmxVdecHevc \
+    libOmxVdpp \
     libOmxVenc \
-    libstagefrighthw
+    libOmxVidEnc \
+    libomx_aacdec_sharedlibrary \
+    libomx_amr_component_lib \
+    libomx_amrdec_sharedlibrary \
+    libomx_amrenc_sharedlibrary \
+    libomx_avcdec_sharedlibrary \
+    libomx_m4vdec_sharedlibrary \
+    libomx_mp3dec_sharedlibrary \
+    libomx_sharedlibrary \
+    libstagefrighthw \
+    qcmediaplayer
 
 # Performance
 PRODUCT_COPY_FILES += \
