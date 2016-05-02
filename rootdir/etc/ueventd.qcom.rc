@@ -244,3 +244,6 @@
 #ImproveTouch device
 /dev/hbtp_input           0660   system     system
 /dev/hbtp_vm              0660   system     system
+
+# for lirc
+/dev/lirc0          0660   system     system
