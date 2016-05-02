@@ -162,9 +162,14 @@ PRODUCT_COPY_FILES += \
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-    e2fsck \
     make_ext4fs \
-    setup_fs
+    setup_fs \
+    mkntfs \
+    dumpe2fs \
+    resize2fs \
+    e2fsck_static \
+    mke2fs_static \
+    resize2fs_static
 
 # GPS
 PRODUCT_COPY_FILES += \
