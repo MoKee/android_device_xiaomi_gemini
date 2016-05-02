@@ -352,6 +352,12 @@ on post-fs-data
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
 
+service nv_mac /system/bin/nv_mac
+    class main
+    user root
+    group net_raw
+    oneshot
+
 service iop /system/bin/iop
     class main
     user root
