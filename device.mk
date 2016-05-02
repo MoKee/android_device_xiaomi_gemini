@@ -38,7 +38,8 @@ $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 PRODUCT_COPY_FILES += \
-    device/xiaomi/gemini/kernel:kernel
+    device/xiaomi/gemini/kernel:kernel \
+    $(LOCAL_PATH)/rootdir/etc/sbin/chargeonlymode:root/sbin/chargeonlymode
 
 # Permissions
 PRODUCT_COPY_FILES += \
