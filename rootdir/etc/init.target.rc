@@ -40,7 +40,11 @@ on post-fs
 
 on init
     mkdir /cust 0771 system system
+    # set logd.radio buffer size
+    setprop persist.logd.size.radio "4M"
+    setprop persist.logd.prunelist "1000 1013"
     # write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
+    setprop persist.http.gba.auth false
 
 on fs
     wait /dev/block/bootdevice
@@ -105,13 +109,14 @@ on post-fs-data
     mkdir /data/fpc 0770 system system
     mkdir /data/fpc/s 0770 system system
 
-on property:init.svc.bootanim=running
-    write /sys/class/leds/wled/brightness 4095
+# on property:init.svc.bootanim=running
+#    write /sys/class/leds/wled/brightness 4095
 
 on boot
     start rmt_storage
     start rfs_access
     # nfc init config
+    setprop ro.nfc.port "I2C"
     chmod 0660 /dev/pn548
     chown nfc nfc /dev/pn548
 # access permission for secure touch
@@ -158,6 +163,7 @@ service qfp-daemon /system/bin/qfp-daemon
     class late_start
     user system
     group system drmrpc diag input
+    disabled
 
 service qvop-daemon /system/bin/qvop-daemon
     class late_start
@@ -357,6 +363,12 @@ on property:persist.sys.pd_enable=1
 on property:persist.sys.pd_enable=0
      write /sys/class/service_locator/service_locator_status 0
 
+#
+## QCA1530 SoC late_start group trigger
+#service gnss-init /system/vendor/bin/gnss.qca1530.sh init
+#   class late_start
+#   oneshot
+#
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
