@@ -156,6 +156,9 @@ TARGET_PROVIDES_KEYMASTER := true
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
+# MDTP (Mobile Device Theft Protection)
+TARGET_USE_MDTP := true
+
 # NFC
 BOARD_NFC_CHIPSET := pn548
 
