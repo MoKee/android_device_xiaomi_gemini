@@ -25,6 +25,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
+include kernel/xiaomi/gemini/AndroidKernel.mk
+
 ifneq ($(filter gemini,$(TARGET_DEVICE)),)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 

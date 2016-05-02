@@ -37,8 +37,12 @@ TARGET_SCREEN_WIDTH := 1080
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
+PRODUCT_COPY_FILES += \
+    device/xiaomi/gemini/kernel:kernel
+
 # Permissions
 PRODUCT_COPY_FILES += \
+    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -104,6 +108,23 @@ PRODUCT_PACKAGES += \
     antradio_app \
     libvolumelistener
 
+# Bson
+PRODUCT_PACKAGES += \
+    libbson
+
+# Camrera
+PRODUCT_PACKAGES += \
+    Snap
+
+# Connectivity Engine support
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig
+
+# Curl
+PRODUCT_PACKAGES += \
+    libcurl \
+    curl
+
 # Device config scripts
 PRODUCT_PACKAGES += \
     hsic.control.bt.sh \
@@ -132,7 +153,8 @@ PRODUCT_PACKAGES += \
     gralloc.msm8996 \
     hwcomposer.msm8996 \
     memtrack.msm8996 \
-    liboverlay
+    liboverlay \
+    libtinyxml
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/calib.cfg:system/etc/calib.cfg
@@ -140,6 +162,12 @@ PRODUCT_COPY_FILES += \
 #FEATURE_OPENGLES_EXTENSION_PACK support string config file
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    e2fsck \
+    make_ext4fs \
+    setup_fs
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -161,6 +189,12 @@ PRODUCT_COPY_FILES += \
 # IRQ Balancer
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf
+
+# IPv6
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes \
+    libebtc
 
 # Keystore
 PRODUCT_PACKAGES += \
@@ -234,6 +268,15 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     power.msm8996
 
+# Ril
+PRODUCT_PACKAGES += \
+    libtinyxml2 \
+    libxml2
+
+# Rmnetctl
+PRODUCT_PACKAGES += \
+    librmnetctl
+
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.msm8996
@@ -242,9 +285,17 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:system/etc/sensors/hals.conf \
     $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf
 
+# Stlport
+PRODUCT_PACKAGES += \
+    libstlport
+
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine-8996.conf:system/etc/thermal-engine-8996.conf
+
+# USB
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory
 
 # WiFi
 PRODUCT_PACKAGES += \
