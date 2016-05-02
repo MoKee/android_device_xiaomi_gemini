@@ -125,6 +125,8 @@ on boot
     chown system system /sys/class/leds/green/blink
     chown system system /sys/class/leds/blue/blink
 
+    chown system system /sys/class/leds/button-backlight1/brightness
+
     setprop wifi.interface wlan0
 
 #   Define TCP buffer sizes for various networks
