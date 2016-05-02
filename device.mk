@@ -156,7 +156,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/calib.cfg:system/etc/calib.cfg
 
-#FEATURE_OPENGLES_EXTENSION_PACK support string config file
+# FEATURE_OPENGLES_EXTENSION_PACK support string config file
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
 
@@ -170,6 +170,10 @@ PRODUCT_PACKAGES += \
     e2fsck_static \
     mke2fs_static \
     resize2fs_static
+
+# FingerPrint
+PRODUCT_PACKAGES += \
+    fingerprintd
 
 # GPS
 PRODUCT_COPY_FILES += \
