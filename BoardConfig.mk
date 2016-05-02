@@ -103,6 +103,12 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_LDPRELOAD := libNimsWrap.so
 BOARD_USES_QCNE := true
 
+# CMHW
+BOARD_USES_CYANOGEN_HARDWARE := true
+BOARD_HARDWARE_CLASS := \
+    device/xiaomi/gemini/cmhw \
+    hardware/cyanogen/cmhw
+
 # Display
 TARGET_USES_C2D_COMPOSITION := true
 
