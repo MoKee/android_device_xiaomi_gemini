@@ -1,3 +1,4 @@
+bin/adsprpcd
 bin/btnvtool
 bin/cnd
 bin/cnss-daemon
@@ -30,6 +31,7 @@ bin/mm-qcamera-app
 bin/mm-qcamera-daemon
 bin/mm-vidc-omx-test
 bin/msm_irqbalance
+bin/netmgrd
 bin/nv_mac
 bin/nxp_do_cal.sh
 bin/nxp_do_f0.sh
@@ -49,6 +51,7 @@ bin/qrngtest
 bin/qseecomd
 bin/qseecom_sample_client
 bin/qseecom_security_test
+bin/rmt_storage
 bin/qvop-daemon
 bin/sensors.qcom
 bin/smeloop
