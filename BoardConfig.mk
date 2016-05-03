@@ -48,7 +48,7 @@ BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 an
 BOARD_MKBOOTIMG_ARGS := --dt device/xiaomi/gemini/dt.img
 #TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/zImage
 
-#BOARD_KERNEL_SEPARATED_DT := true
+BOARD_KERNEL_SEPARATED_DT := true
 
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -183,6 +183,14 @@ TARGET_USES_QCOM_BSP := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/recovery.fstab
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
+# Ril
+TARGET_RIL_VARIANT := caf
+SIM_COUNT := 2
+TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
+TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
+# Added to indicate that protobuf-c is supported in this build
+PROTOBUF_SUPPORTED := true
+
 # Sensor multi HAL
 USE_SENSOR_MULTI_HAL := true
 
@@ -206,6 +214,8 @@ TARGET_USES_WCNSS_CTRL := true
 WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_P2P := "p2p"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME := "wlan"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
