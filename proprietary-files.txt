@@ -1611,3 +1611,14 @@ vendor/lib64/soundfx/libqcvirt.so
 vendor/speccfg/ota.zip
 vendor/speccfg/spec
 vendor/speccfg/switch_spec.sh
+lib/soundfx/libqcomvisualizer.so
+lib64/soundfx/libqcomvisualizer.so
+lib/soundfx/libqcompostprocbundle.so
+lib64/soundfx/libqcompostprocbundle.so
+lib/soundfx/libvolumelistener.so
+lib64/soundfx/libvolumelistener.so
+lib/soundfx/libqcomvoiceprocessing.so
+lib64/soundfx/libqcomvoiceprocessing.so
+lib/hw/audio.primary.msm8996.so
+lib64/hw/audio.primary.msm8996.so
+bin/audiod
