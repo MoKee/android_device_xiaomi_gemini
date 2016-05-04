@@ -246,7 +246,10 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     NfcNci \
     nfc_nci.pn54x.default \
-    Tag
+    Tag \
+    libnfc-nci \
+    libnfc_nci_jni
+
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
