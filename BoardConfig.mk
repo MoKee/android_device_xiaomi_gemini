@@ -162,6 +162,7 @@ TARGET_USE_MDTP := true
 
 # NFC
 BOARD_NFC_CHIPSET := pn548
+BOARD_NFC_DEVICE := "/dev/pn548"
 
 # PD locater/notifier
 TARGET_PD_SERVICE_ENABLED := true
