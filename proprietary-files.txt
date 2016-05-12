@@ -3,6 +3,7 @@ bin/btnvtool
 bin/cnd
 bin/cnss-daemon
 bin/cnss_diag
+bin/dun-server
 bin/energy-awareness
 bin/ftmdaemon
 bin/hal_proxy_daemon
@@ -67,6 +68,7 @@ bin/ssr_setup
 bin/time_daemon
 bin/usf_proximity
 bin/usf_tester
+bin/wcnss_filter
 bin/wdsdaemon
 bin/wfdservice
 bin/xtwifi-client
@@ -365,7 +367,6 @@ vendor/lib/libaudiodevarb.so
 vendor/lib/libavenhancements.so
 vendor/lib/libbccQTI.so
 vendor/lib/libbtnv.so
-vendor/lib/libbt-vendor.so
 vendor/lib/libC2D2.so
 vendor/lib/libc2d30-a3xx.so
 vendor/lib/libc2d30-a4xx.so
@@ -1334,7 +1335,6 @@ vendor/lib64/libaudiodevarb.so
 vendor/lib64/libavenhancements.so
 vendor/lib64/libbccQTI.so
 vendor/lib64/libbtnv.so
-vendor/lib64/libbt-vendor.so
 vendor/lib64/libC2D2.so
 vendor/lib64/libc2d30-a3xx.so
 vendor/lib64/libc2d30-a4xx.so
