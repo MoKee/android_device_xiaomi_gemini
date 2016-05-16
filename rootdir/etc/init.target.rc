@@ -211,6 +211,12 @@ on property:sys.shutdown.requested=*
 #on property:sys.boot_completed=1
 #    start qrngp
 
+service readmac /system/bin/readmac
+     class main
+     user root
+     group root
+     oneshot
+
 service qseecomd /system/bin/qseecomd
    class core
    user root
