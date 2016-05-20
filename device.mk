@@ -112,6 +112,10 @@ PRODUCT_PACKAGES += \
     antradio_app \
     libvolumelistener
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    libbt-vendor
+
 # Bson
 PRODUCT_PACKAGES += \
     libbson
@@ -123,11 +127,6 @@ PRODUCT_PACKAGES += \
 # Connectivity Engine support
 PRODUCT_PACKAGES += \
     libcnefeatureconfig
-
-# Curl
-PRODUCT_PACKAGES += \
-    libcurl \
-    curl
 
 # Device init scripts
 PRODUCT_PACKAGES += \
@@ -228,6 +227,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
 
+# Misc dependency packages
+PRODUCT_PACKAGES += \
+    readmac \
+    curl \
+    libcurl \
+    libnl_2 \
+    libdrmclearkeyplugin
+
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf
@@ -252,9 +259,12 @@ PRODUCT_PACKAGES += \
 
 
 PRODUCT_COPY_FILES += \
+    packages/apps/Nfc/migrate_nfc.txt:system/etc/updatecmds/migrate_nfc.txt \
     $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     $(LOCAL_PATH)/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
-    $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
+    $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml \
+    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
 
 # SmartcardService, SIM1,SIM2,eSE1 not including eSE2,SD1 as default
 ADDITIONAL_BUILD_PROPERTIES += persist.nfc.smartcard.config=SIM1,SIM2,eSE1
@@ -287,7 +297,9 @@ PRODUCT_PACKAGES += \
     libomx_mp3dec_sharedlibrary \
     libomx_sharedlibrary \
     libstagefrighthw \
-    qcmediaplayer
+    qcmediaplayer \
+    libmm-omxcore \
+    libqdMetaData
 
 # Performance
 PRODUCT_COPY_FILES += \
