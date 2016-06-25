@@ -17,12 +17,12 @@
 $(call inherit-product, device/xiaomi/gemini/full_gemini.mk)
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, vendor/mk/config/common_full_phone.mk)
 
 # Enhanced NFC
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
+$(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
 
-PRODUCT_NAME := cm_gemini
+PRODUCT_NAME := mk_gemini
 BOARD_VENDOR := Xiaomi
 TARGET_VENDOR := Xiaomi
 PRODUCT_DEVICE := gemini
@@ -31,6 +31,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE="gemini" \
-    PRODUCT_NAME="gemini" \
-    BUILD_FINGERPRINT="Xiaomi/gemini/gemini:6.0/MRA58K/V7.3.10.0.MAACNDD:user/release-keys" \
-    PRIVATE_BUILD_DESC="gemini-user 6.0 MRA58K V7.3.10.0.MAACNDD release-keys"
+    PRODUCT_NAME="gemini"
