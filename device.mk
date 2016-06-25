@@ -171,7 +171,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.msm8996
 
-PRODUCT_COPY_FILES += \
+PRODUCT_PACKAGES += \
+    flp.conf \
+    gps.conf \
+    izat.conf \
+    lowi.conf \
+    sap.conf \
+    xtwifi.conf
+
+#PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:system/etc/flp.conf \
     $(LOCAL_PATH)/gps/etc/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/gps/etc/izat.conf:system/etc/izat.conf \
@@ -260,8 +268,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perf-profile2.conf:system/vendor/etc/perf-profile2.conf \
     $(LOCAL_PATH)/configs/perf-profile3.conf:system/vendor/etc/perf-profile3.conf \
     $(LOCAL_PATH)/configs/perf-profile4.conf:system/vendor/etc/perf-profile4.conf \
-    $(LOCAL_PATH)/configs/perf-profile5.conf:system/vendor/etc/perf-profile5.conf
-
+    $(LOCAL_PATH)/configs/perf-profile5.conf:system/vendor/etc/perf-profile5.conf \
+    $(LOCAL_PATH)/configs/perf-profile6.conf:system/vendor/etc/perf-profile6.conf
 # Power
 PRODUCT_PACKAGES += \
     power.msm8996

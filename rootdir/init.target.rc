@@ -67,6 +67,7 @@ on post-fs-data
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/misc/tloc/ 0700 system drmrpc
     mkdir /data/misc/qvop 0660 system system
+    mkdir /data/misc/qvr 0770 system system
     mkdir /data/misc/audio_pp 0771 media audio
     chown system system /dev/sysmatdrv
     chmod 0660 /dev/sysmatdrv
@@ -77,10 +78,10 @@ on boot
     start rmt_storage
 	
     # Access permission for secure touch
-    chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
-    chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
-    chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
-    chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
+    chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
+    chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
+    chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
+    chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
     write /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input0/update_fw 1
 
     write /proc/sys/kernel/sched_boost 1
@@ -91,6 +92,7 @@ on boot
     chmod 0666 /sys/class/leds/led:switch/brightness
 
     # Access permission for smartPA
+    chmod 0666 /dev/i2c-3
     chmod 0666 /dev/i2c-9
 
 # Audio smartPA cold boot
@@ -114,19 +116,23 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 service fingerprintd /system/bin/fingerprintd
     class late_start
     user system
-    group drmrpc input system
-    socket fpce stream 0660 system system
+    group system sdcard_rw
 
 service qfp-daemon /system/bin/qfp-daemon
     class late_start
     user system
-    group system drmrpc diag input
-    disabled
+    group system drmrpc diag input sdcard_rw
 
 service qvop-daemon /system/bin/qvop-daemon
     class late_start
     user system
     group system drmrpc
+
+service qvrd /system/vendor/bin/qvrservice
+    class late_start
+    user system
+    group system camera graphics
+    socket qvrservice stream 0666 system system
 
 # Start up peripheral manager
 service per_mgr system/bin/pm-service
@@ -146,6 +152,15 @@ on property:init.svc.per_mgr=running
 
 on property:sys.shutdown.requested=*
     stop per_proxy
+
+service mdm_launcher /system/bin/sh init.mdm.sh
+     class core
+     oneshot
+
+service mdm_helper /system/bin/mdm_helper
+     class core
+     group root system
+     disabled
 
 service qseecomd /system/bin/qseecomd
     class core
@@ -219,11 +234,12 @@ on property:sys.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
     start imscmservice
 
-service ppd /system/bin/mm-pp-dpps
+service ppd /system/vendor/bin/mm-pp-dpps
     class late_start
     user system
     group system graphics
     socket pps stream 0660 system system
+    disabled
 
 on property:init.svc.surfaceflinger=stopped
     stop displayfeature
@@ -245,12 +261,6 @@ service qpaydaemon /system/vendor/bin/qpaydaemon
     class late_start
     user system
     group system
-
-service nv_mac /system/bin/nv_mac
-   class main
-   user root
-   group net_raw
-   oneshot
 
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
