@@ -39,6 +39,12 @@ on init
 on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
+
+    # Set aggressive read ahead during boot up
+    write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/sda/queue/read_ahead_kb 2048
+    write /sys/block/sde/queue/read_ahead_kb 2048
+
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
 
@@ -46,11 +52,8 @@ on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
-    chown system system /sys/module/radio_iris_transport/parameters/fmsmd_set
     chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
     chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
-    chown system system /dev/captouch
-    chmod 0660 /dev/captouch
 
     chmod 0660 /sys/module/bluetooth_power/parameters/power
 
@@ -75,6 +78,7 @@ on boot
     chmod 2770 /dev/socket/qmux_gps
 
     mkdir /persist/drm 0770 system system
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
 
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
@@ -87,8 +91,8 @@ on boot
     chown system system /sys/class/leds/button-backlight1/brightness
 
     # DT2W and KeyDisabler permissions
-    chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/wake_gesture
-    chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/0dbutton
+    chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input2/wake_gesture
+    chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input2/0dbutton
 
     # Graphic node permissions
     chown system graphics /sys/class/graphics/fb0/idle_time
@@ -287,8 +291,6 @@ on post-fs-data
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
     # Create PERFD deamon related dirs
-    mkdir /dev/socket/perfd 0755 root system
-    chmod 2755 /dev/socket/perfd
     mkdir /data/system/perfd 0770 root system
     chmod 2770 /data/system/perfd
 
@@ -312,18 +314,13 @@ on post-fs-data
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
 
-service perfd /system/vendor/bin/perfd
-   class main
-   user root
-   disabled
-   socket perfd seqpacket 0666 root system
-
 service iop /system/bin/iop
     class main
     user root
     group root
     disabled
     socket iop seqpacket 0666 root system
+    writepid /dev/cpuset/system-background/tasks
 
 service qcomsysd /system/bin/qcom-system-daemon
     class main
@@ -353,9 +350,10 @@ on property:persist.sys.ssr.enable_ramdumps=0
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-
-    # CPE fw_name used by sound trigger HAL
-    chown media audio /sys/kernel/wcd_cpe0/fw_name
+    # Reset the read_ahead_kb to 512
+    write /sys/block/dm-0/queue/read_ahead_kb 512
+    write /sys/block/sda/queue/read_ahead_kb 512
+    write /sys/block/sde/queue/read_ahead_kb 512
 
 # Corefile limit
 on property:persist.debug.trace=1
@@ -484,8 +482,6 @@ service port-bridge /system/bin/port-bridge
     class main
     user radio system
     group radio system inet
-    disabled
-    oneshot
 
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
@@ -562,7 +558,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
 service wigig_supplicant /system/bin/wpa_supplicant \
     -iwigig0 -Dnl80211 -c/data/misc/wifi/wigig_supplicant.conf \
     -m/data/misc/wifi/wigig_p2p_supplicant.conf \
-    -O/data/misc/wifi/wigig_sockets -dd \
+    -O/data/misc/wifi/wigig_sockets \
     -e/data/misc/wifi/wigig_entropy.bin -g@android:wpa_wigig0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
@@ -626,6 +622,16 @@ service iprenew_wigig0 /system/bin/dhcpcd -n
     class late_start
     disabled
     oneshot
+
+service wifi_fccutild /system/bin/wifi_fccutild
+    user system
+    group system inet net_admin
+    socket wififccutild_server dgram 0660 system system
+    disabled
+    oneshot
+
+on property:wifi.fccutild.load.qcacld=true
+    insmod /system/lib/modules/qca_cld/qca_cld_wlan.ko con_mode=5
 
 service cnss_diag /system/bin/cnss_diag -q -f
     class main
@@ -694,11 +700,6 @@ service leds-sh /system/bin/sh /system/etc/init.leds.sh
     user root
     oneshot
 
-service captouch-sh /system/bin/sh /system/etc/init.captouch.sh
-    class late_start
-    user root
-    oneshot
-
 service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
     class late_start
     user root
@@ -732,14 +733,6 @@ service ril-daemon2 /system/bin/rild -c 2
     socket rild2 stream 660 root radio
     socket rild-debug2 stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log net_raw
-
-service ril-daemon3 /system/bin/rild -c 3
-    class main
-    socket rild3 stream 660 root radio
-    socket rild-debug3 stream 660 radio system
-    user root
-    disabled
     group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log net_raw
 
 service ssr_diag /system/bin/ssr_diag
@@ -778,13 +771,7 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     user root
     group root
     disabled
-
-service wfdservice /system/bin/wfdservice
-    class main
-    user system
-    group audio camera inet net_bt_stack drmrpc media_rw media input net_admin
-    #removed these because of limit of 12 groups
-    #graphics net_bt net_bt_admin bluetooth
+    writepid /dev/cpuset/system-background/tasks
 
 service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     class late_start

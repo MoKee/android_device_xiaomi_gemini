@@ -1,3 +1,7 @@
+# Android XLAT
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.net.doxlat=true
+
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
@@ -9,16 +13,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.pcm.24bit.enable=true \
     audio.offload.track.enable=false \
     audio.offload.multiaac.enable=true \
-    audio.offload.multiple.enabled=false \
+    audio.offload.multiple.enabled=true \
     audio.offload.passthrough=false \
     audio.offload.gapless.enabled=true \
     audio.deep_buffer.media=true \
     audio.safx.pbe.enabled=true \
-    audio.parser.ip.buffer.size=262144 \
+    audio.parser.ip.buffer.size=0 \
     audio.dolby.ds2.enabled=false \
     audio.dolby.ds2.hardbypass=false \
-    tunnel.audio.encode=true \
-    use.voice.path.for.pcm.voip=true
+    tunnel.audio.encode=false \
+    use.voice.path.for.pcm.voip=true \
+    audio.offload.min.duration.secs=15
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.ssr=false \
@@ -38,6 +43,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.btconfig.dev=/dev/ttyHS0 \
     qcom.bluetooth.soc=rome
 
+# CABL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qualcomm.cabl=0
+
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.stats.test=5
@@ -48,6 +57,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.dpm.feature=5 \
     persist.dpm.nsrm.bkg.evt=3955 \
     persist.env.fastdorm.enabled=false
+
+# DCVS
+PRODUCT_PROPERTY_OVERRIDES += \
+    vidc.enc.dcvs.extra-buff-count=2
+
+#default pd_enable value
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.pd_enable=0
+
+#Disable rotator split feature
+PRODUCT_PROPERTY_OVERRIDES += \
+    sdm.debug.disable_rotator_split=1
 
 # Fingerprint
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -70,15 +91,36 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true \
     ro.opengles.version=196609 \
     ro.sf.lcd_density=480 \
-    ro.sys.display.support=63
+    ro.sys.display.support=63 \
+    dev.pm.dyn_samplingrate=1 \
+    persist.demo.hdmirotationlock=false
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
     ro.gps.agps_provider=1
 
-# Media
+# hwui
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hwui.texture_cache_size=72 \
+    ro.hwui.layer_cache_size=48 \
+    ro.hwui.r_buffer_cache_size=8 \
+    ro.hwui.path_cache_size=32 \
+    ro.hwui.gradient_cache_size=1 \
+    ro.hwui.drop_shadow_cache_size=6 \
+    ro.hwui.texture_cache_flushrate=0.4 \
+    ro.hwui.text_small_cache_width=1024 \
+    ro.hwui.text_small_cache_height=1024 \
+    ro.hwui.text_large_cache_width=2048 \
+    ro.hwui.text_large_cache_height=1024
+
+#Increase cached app limit
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.fw.bg_apps_limit=60
+
+# Media
+#PRODUCT_PROPERTY_OVERRIDES += \
+    qcom.hw.aac.encoder=false \
     media.aac_51_output_enabled=true \
     media.stagefright.enable-player=true \
     media.stagefright.enable-http=true \
@@ -86,8 +128,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.enable-qcp=true \
     media.stagefright.enable-fma2dp=true \
     media.stagefright.enable-scan=true \
-    mm.enable.smoothstreaming=true \
     mmp.enable.3g2=true \
+    media.aac_51_output_enabled=true \
+    av.debug.disable.pers.cache=true \
+    mm.enable.smoothstreaming=true \
     persist.mm.enable.prefetch=true
 
 # NFC
@@ -106,6 +150,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_1="" \
     persist.rild.nitz_short_ons_2="" \
     persist.rild.nitz_short_ons_3=""
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=196609
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -127,11 +174,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     DEVICE_PROVISIONED=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
-    ril.subscription.types=RUIM \
+    ril.subscription.types=NV,RUIM \
     ro.baseband.arch=msm \
-    ro.ril.gprsclass=10 \
-    ro.ril.hsxpa=1 \
-    ro.telephony.default_network=9,9 \
+    ro.telephony.default_network=22,22 \
     ro.telephony.default_cdma_sub=0 \
     ro.telephony.call_ring.multiple=false \
     ro.use_data_netmgrd=true \
@@ -143,17 +188,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.fd.scron.timer=10000 \
     persist.logd.size.radio=4M \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.radio.calls.on.ims=0 \
-    persist.radio.jbims=0 \
-    persist.radio.csvt.enabled=false \
-    persist.radio.data_no_toggle=1 \
-    persist.radio.force_on_dc=true \
-    persist.radio.rat_on=combine \
-    persist.radio.mt_sms_ack=20 \
+    persist.radio.report_codec=1 \
     persist.radio.multisim.config=dsds \
-    persist.radio.custom_ecc=1 \
     persist.radio.sib16_support=1 \
     persist.radio.NO_STAPA=1 \
+    persist.radio.rat_on=combine \
     persist.radio.VT_HYBRID_ENABLE=1 \
     sys.ims.DATA_DAEMON_STATUS=1 \
     telephony.lteOnCdmaDevice=1
@@ -169,10 +208,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.iwlan_mux=9 \
     persist.data.df.dev_name=rmnet_usb0
 
+# Set default power mode to low power for encoder
+PRODUCT_PROPERTY_OVERRIDES += \
+    vidc.debug.perf.mode=2
+
 # Subsystem
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.ssr.restart_level=ALL_ENABLE \
     persist.sys.ssr.enable_ramdumps=0
+
+# System props for time-services
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.timed.enable=true
 
 # Vendor specific
 PRODUCT_PROPERTY_OVERRIDES += \

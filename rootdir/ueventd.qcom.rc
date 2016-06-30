@@ -124,7 +124,6 @@
 /dev/mdss_rotator         0664   system     system
 /dev/tiload_node          0660   system     system
 /dev/msm_camera/*         0660   system     camera
-
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
 /dev/msm_vidc_reg         0660   system     audio
@@ -238,12 +237,13 @@
 /dev/qbt1000              0660   system     system
 /dev/fpc1020              0666   system     system
 
-# Capacitive touch emulation device
-/dev/captouch             0666   system     system
-
 #ImproveTouch device
 /dev/hbtp_input           0660   system     system
 /dev/hbtp_vm              0660   system     system
 
 # IR device
 /dev/lirc0                0660   system     system
+
+# Device block for FRP
+/dev/block/bootdevice/by-name/frp                                  0660   system     system
+/dev/block/platform/soc/624000.ufshc/by-name/frp                   0660   system     system
