@@ -129,9 +129,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.enable-fma2dp=true \
     media.stagefright.enable-scan=true \
     mmp.enable.3g2=true \
-    media.aac_51_output_enabled=true \
     av.debug.disable.pers.cache=true \
     mm.enable.smoothstreaming=true \
+    mm.enable.qcom_parser=1048575 \
     persist.mm.enable.prefetch=true
 
 # NFC
