@@ -31,6 +31,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE="gemini" \
-    PRODUCT_NAME="gemini" \
-    BUILD_FINGERPRINT="Xiaomi/gemini/gemini:6.0/MRA58K/V7.2.12.0.MAACNDB:user/release-keys" \
-    PRIVATE_BUILD_DESC="gemini-user 6.0 MRA58K V7.2.12.0.MAACNDB release-keys"
+    PRODUCT_NAME="gemini"

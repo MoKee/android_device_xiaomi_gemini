@@ -35,6 +35,89 @@ $(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/qca_cld; \
     ln -sf /system/etc/wifi/WCNSS_qcom_cfg.ini \
 	    $(TARGET_OUT)/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini; \
     ln -sf /persist/wlan_mac.bin \
-	    $(TARGET_OUT_ETC)/firmware/wlan/qca_cld/wlan_mac.bin)
+	    $(TARGET_OUT_ETC)/firmware/wlan/qca_cld/wlan_mac.bin; \
+    ln -sf /dev/block/bootdevice/by-name/msadp \
+	    $(TARGET_OUT_ETC)/firmware/msadp)
+
+# Create symlinks for misc devices
+$(shell mkdir -p $(TARGET_OUT)/etc/firmware/wcd9320; \
+    ln -sf /data/misc/audio/wcd9320_anc.bin \
+	    $(TARGET_OUT_ETC)/firmware/wcd9320/wcd9320_anc.bin; \
+    ln -sf /data/misc/audio/wcd9320_mad_audio.bin \
+	    $(TARGET_OUT_ETC)/firmware/wcd9320/wcd9320_mad_audio.bin; \
+    ln -sf /data/misc/audio/mbhc.bin \
+	    $(TARGET_OUT_ETC)/firmware/wcd9320/mbhc.bin; \
+    mkdir -p  $(TARGET_OUT)/rfs/apq/gnss/readonly; \
+    ln -sf /firmware \
+	    $(TARGET_OUT)/rfs/apq/gnss/readonly/firmware; \
+    mkdir -p $(TARGET_OUT)/rfs/apq/gnss; \
+    ln -sf /persist/hlos_rfs/shared \
+	    $(TARGET_OUT)/rfs/apq/gnss/hlos; \
+    ln -sf /data/tombstones/modem \
+	    $(TARGET_OUT)/rfs/apq/gnss/ramdumps; \
+    ln -sf /persist/rfs/apq/gnss \
+	    $(TARGET_OUT)/rfs/apq/gnss/readwrite; \
+    ln -sf /persist/rfs/shared \
+	    $(TARGET_OUT)/rfs/apq/gnss/shared; \
+    mkdir -p $(TARGET_OUT)/rfs/mdm/adsp/readonly; \
+    ln -sf /firmware \
+	    $(TARGET_OUT)/rfs/mdm/adsp/readonly/firmware; \
+    mkdir -p $(TARGET_OUT)/rfs/mdm/adsp; \
+    ln -sf /persist/hlos_rfs/shared \
+	    $(TARGET_OUT)/rfs/mdm/adsp/hlos; \
+    ln -sf /data/tombstones/lpass \
+	    $(TARGET_OUT)/rfs/mdm/adsp/ramdumps; \
+    ln -sf /persist/rfs/mdm/adsp \
+	    $(TARGET_OUT)/rfs/mdm/adsp/readwrite; \
+    ln -sf /persist/rfs/shared \
+	    $(TARGET_OUT)/rfs/mdm/adsp/shared; \
+    mkdir -p $(TARGET_OUT)/rfs/mdm/mpss/readonly; \
+    ln -sf /firmware \
+	    $(TARGET_OUT)/rfs/mdm/mpss/readonly/firmware; \
+    mkdir -p $(TARGET_OUT)/rfs/mdm/mpss; \
+    ln -sf /persist/hlos_rfs/shared \
+	    $(TARGET_OUT)/rfs/mdm/mpss/hlos; \
+    ln -sf /data/tombstones/modem \
+	    $(TARGET_OUT)/rfs/mdm/mpss/ramdumps; \
+    ln -sf /persist/rfs/mdm/mpss \
+	    $(TARGET_OUT)/rfs/mdm/mpss/readwrite; \
+    ln -sf /persist/rfs/shared \
+	    $(TARGET_OUT)/rfs/mdm/mpss/shared; \
+    mkdir -p $(TARGET_OUT)/rfs/mdm/sparrow/readonly; \
+    ln -sf /firmware \
+	    $(TARGET_OUT)/rfs/mdm/sparrow/readonly/firmware; \
+    mkdir -p $(TARGET_OUT)/rfs/mdm/sparrow; \
+    ln -sf /persist/hlos_rfs/shared \
+	    $(TARGET_OUT)/rfs/mdm/sparrow/hlos; \
+    ln -sf /data/tombstones/sparrow \
+	    $(TARGET_OUT)/rfs/mdm/sparrow/ramdumps; \
+    ln -sf /persist/rfs/mdm/sparrow \
+	    $(TARGET_OUT)/rfs/mdm/sparrow/readwrite; \
+    ln -sf /persist/rfs/shared \
+	    $(TARGET_OUT)/rfs/mdm/sparrow/shared; \
+    mkdir -p $(TARGET_OUT)/rfs/msm/adsp/readonly; \
+    ln -sf /firmware \
+	    $(TARGET_OUT)/rfs/msm/adsp/readonly/firmware; \
+    mkdir -p $(TARGET_OUT)/rfs/msm/adsp; \
+    ln -sf /persist/hlos_rfs/shared \
+	    $(TARGET_OUT)/rfs/msm/adsp/hlos; \
+    ln -sf /data/tombstones/lpass \
+	    $(TARGET_OUT)/rfs/msm/adsp/ramdumps; \
+    ln -sf /persist/rfs/msm/adsp \
+	    $(TARGET_OUT)/rfs/msm/adsp/readwrite; \
+    ln -sf /persist/rfs/shared \
+	    $(TARGET_OUT)/rfs/msm/adsp/shared; \
+    mkdir -p $(TARGET_OUT)/rfs/msm/mpss/readonly; \
+    ln -sf /firmware \
+	    $(TARGET_OUT)/rfs/msm/mpss/readonly/firmware; \
+    mkdir -p $(TARGET_OUT)/rfs/msm/mpss; \
+    ln -sf /persist/hlos_rfs/shared \
+	    $(TARGET_OUT)/rfs/msm/mpss/hlos; \
+    ln -sf /data/tombstones/modem \
+	    $(TARGET_OUT)/rfs/msm/mpss/ramdumps; \
+    ln -sf /persist/rfs/msm/mpss \
+	    $(TARGET_OUT)/rfs/msm/mpss/readwrite; \
+    ln -sf /persist/rfs/shared \
+	    $(TARGET_OUT)/rfs/msm/mpss/shared;)
 
 endif

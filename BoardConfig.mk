@@ -44,7 +44,7 @@ TARGET_NO_BOOTLOADER := true
 BOARD_CUSTOM_BOOTIMG_MK := device/xiaomi/gemini/mkbootimg.mk
 #TARGET_KERNEL_SOURCE := kernel/qcom
 #TARGET_KERNEL_CONFIG := msm-perf_defconfig
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=16M@0-0xffffffff androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=16M@0-0xffffffff androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --dt device/xiaomi/gemini/dt.img
 #TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/zImage
 

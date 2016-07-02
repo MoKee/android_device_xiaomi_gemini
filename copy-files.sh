@@ -11,7 +11,7 @@ for FILE in `cat proprietary-files.txt | grep -v ^# | grep -v ^$ | sed -e 's#^/s
     if [ ! -d $BASE/$DIR ]; then
         mkdir -p $BASE/$DIR
     fi
-    cp  /home/crancocco/libra/gemini/miui/system/$FILE $BASE/$FILE
+    cp  /home/crancocco/libra/gemini/miui/7.3.4.0/system/$FILE $BASE/$FILE
     #echo "Copy file $FILE done"
 done
 

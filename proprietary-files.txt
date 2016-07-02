@@ -293,7 +293,6 @@ usr/keylayout/uinput-fpc.kl
 vendor/bin/audioflacapp
 vendor/bin/chamomile_provision
 vendor/bin/hdcp1prov
-vendor/bin/mdtp_service
 vendor/bin/mm-qjpeg-dec-test
 vendor/bin/mm-qjpeg-enc-test
 vendor/bin/mm-qomx-idec-test
@@ -994,9 +993,6 @@ vendor/lib/libmare-1.1.so
 vendor/lib/libmare-cpu-1.1.so
 vendor/lib/libmdmdetect.so
 vendor/lib/libmdsprpc.so
-vendor/lib/libmdtp_crypto.so
-vendor/lib/libmdtpdemojni.so
-vendor/lib/libmdtp.so
 vendor/lib/libmm-abl-oem.so
 vendor/lib/libmm-abl.so
 vendor/lib/libmm-als.so
@@ -1410,9 +1406,6 @@ vendor/lib64/libmare-1.1.so
 vendor/lib64/libmare-cpu-1.1.so
 vendor/lib64/libmdmdetect.so
 vendor/lib64/libmdsprpc.so
-vendor/lib64/libmdtp_crypto.so
-vendor/lib64/libmdtpdemojni.so
-vendor/lib64/libmdtp.so
 vendor/lib64/libmm-abl-oem.so
 vendor/lib64/libmm-abl.so
 vendor/lib64/libmm-als.so
@@ -1611,3 +1604,14 @@ vendor/lib64/soundfx/libqcvirt.so
 vendor/speccfg/ota.zip
 vendor/speccfg/spec
 vendor/speccfg/switch_spec.sh
+lib/soundfx/libqcomvisualizer.so
+lib64/soundfx/libqcomvisualizer.so
+lib/soundfx/libqcompostprocbundle.so
+lib64/soundfx/libqcompostprocbundle.so
+lib/soundfx/libvolumelistener.so
+lib64/soundfx/libvolumelistener.so
+lib/soundfx/libqcomvoiceprocessing.so
+lib64/soundfx/libqcomvoiceprocessing.so
+lib/hw/audio.primary.msm8996.so
+lib64/hw/audio.primary.msm8996.so
+bin/audiod
