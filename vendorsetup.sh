@@ -1,2 +1,1 @@
-add_lunch_combo cm_gemini-eng
 add_lunch_combo cm_gemini-userdebug
