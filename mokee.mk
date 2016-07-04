@@ -22,6 +22,9 @@ $(call inherit-product, vendor/mk/config/common_full_phone.mk)
 # Enhanced NFC
 $(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.mk.maintainer=dianlujitao
+
 PRODUCT_NAME := mk_gemini
 BOARD_VENDOR := Xiaomi
 TARGET_VENDOR := Xiaomi
@@ -32,3 +35,5 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE="gemini" \
     PRODUCT_NAME="gemini"
+
+TARGET_VENDOR := gemini
