@@ -6,7 +6,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
     audio_hal.period_size=192 \
-    audio.offload.disable=0 \
     audio.offload.buffer.size.kb=32 \
     audio.offload.video=true \
     audio.offload.pcm.16bit.enable=true \
@@ -18,20 +17,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.gapless.enabled=true \
     audio.deep_buffer.media=true \
     audio.safx.pbe.enabled=true \
-    audio.parser.ip.buffer.size=0 \
+    audio.parser.ip.buffer.size=262144 \
     audio.dolby.ds2.enabled=false \
     audio.dolby.ds2.hardbypass=false \
-    tunnel.audio.encode=false \
-    use.voice.path.for.pcm.voip=true \
-    audio.offload.min.duration.secs=15
+    ro.audio.flinger_standbytime_ms=300 \
+    tunnel.audio.encode=true \
+    use.voice.path.for.pcm.voip=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.ssr=false \
     ro.qc.sdk.audio.fluencetype=fluence \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
-    persist.audio.fluence.speaker=true \
-    persist.audio.ssr.3mic=false
+    persist.audio.fluence.speaker=true
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -100,39 +98,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
     ro.gps.agps_provider=1
 
-# hwui
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.texture_cache_size=72 \
-    ro.hwui.layer_cache_size=48 \
-    ro.hwui.r_buffer_cache_size=8 \
-    ro.hwui.path_cache_size=32 \
-    ro.hwui.gradient_cache_size=1 \
-    ro.hwui.drop_shadow_cache_size=6 \
-    ro.hwui.texture_cache_flushrate=0.4 \
-    ro.hwui.text_small_cache_width=1024 \
-    ro.hwui.text_small_cache_height=1024 \
-    ro.hwui.text_large_cache_width=2048 \
-    ro.hwui.text_large_cache_height=1024
-
-#Increase cached app limit
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.fw.bg_apps_limit=60
-
 # Media
-#PRODUCT_PROPERTY_OVERRIDES += \
-    qcom.hw.aac.encoder=false \
+PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true \
-    media.stagefright.enable-player=true \
-    media.stagefright.enable-http=true \
-    media.stagefright.enable-aac=true \
-    media.stagefright.enable-qcp=true \
-    media.stagefright.enable-fma2dp=true \
-    media.stagefright.enable-scan=true \
-    mmp.enable.3g2=true \
-    av.debug.disable.pers.cache=true \
-    mm.enable.smoothstreaming=true \
-    mm.enable.qcom_parser=1048575 \
-    persist.mm.enable.prefetch=true
+    mm.enable.smoothstreaming=true
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -156,6 +125,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.min_freq_0=307200 \
+    ro.min_freq_2=307200 \
     ro.vendor.extension_library=libqti-perfd-client.so
 
 # Qualcomm
@@ -182,21 +153,25 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true \
     persist.data.netmgrd.qos.enable=true \
     persist.data.mode=concurrent \
+    persist.volte_enalbed_by_hw=1 \
+    persist.radio.data_ltd_sys_ind=1 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
-    persist.fd.scroff.timer=3000 \
-    persist.fd.scron.timer=10000 \
     persist.logd.size.radio=4M \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.report_codec=1 \
+    persist.radio.force_on_dc=true \
+    persist.radio.rat_on=combine \
     persist.radio.multisim.config=dsds \
+    persist.radio.custom_ecc=1 \
     persist.radio.sib16_support=1 \
     persist.radio.NO_STAPA=1 \
-    persist.radio.rat_on=combine \
     persist.radio.VT_HYBRID_ENABLE=1 \
     sys.ims.DATA_DAEMON_STATUS=1 \
-    telephony.lteOnCdmaDevice=1
+    telephony.lteOnCdmaDevice=1 \
+    telephony.lteOnGsmDevice=1 \
 
+# RmNet Data
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.rmnet.data.enable=true \
     persist.data.wda.enable=true \
@@ -208,16 +183,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.iwlan_mux=9 \
     persist.data.df.dev_name=rmnet_usb0
 
-# Set default power mode to low power for encoder
-PRODUCT_PROPERTY_OVERRIDES += \
-    vidc.debug.perf.mode=2
-
-# Subsystem
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ssr.restart_level=ALL_ENABLE \
-    persist.sys.ssr.enable_ramdumps=0
-
-# System props for time-services
+# TimeService
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true
 
@@ -230,11 +196,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
-
-# WiFi display
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.debug.wfd.enable=1 \
-    persist.hwc.enable_vds=1 \
-    persist.sys.wfd.virtual=0 \
-    sdm.perf_hint_window=50 \
-    ro.vendor.wl_library=libqti-wl.so

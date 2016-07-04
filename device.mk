@@ -90,10 +90,12 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
+    libaudioroute \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libvolumelistener \
+    libtinycompress \
     tinymix
 
 PRODUCT_COPY_FILES += \
@@ -255,8 +257,8 @@ PRODUCT_COPY_FILES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libdashplayer \
     libdivxdrmdecrypt \
+    libmm-omxcore \
     libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
