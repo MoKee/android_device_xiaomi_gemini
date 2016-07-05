@@ -52,8 +52,8 @@ ENABLE_CPUSETS := true
 
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CONFIG := core_64_bit.mk
-TARGET_KERNEL_SOURCE := kernel/xiaomi/msm8996
+TARGET_KERNEL_CONFIG := mokee_oneplus3_defconfig
+TARGET_KERNEL_SOURCE := kernel/oneplus/msm8996
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/zImage
  
