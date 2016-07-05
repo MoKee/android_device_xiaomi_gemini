@@ -23,7 +23,7 @@ $(call inherit-product, vendor/mk/config/common_full_phone.mk)
 $(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.mk.maintainer=dianlujitao
+    ro.mk.maintainer=wood
 
 PRODUCT_NAME := mk_gemini
 BOARD_VENDOR := Xiaomi
