@@ -18,9 +18,5 @@
  {
    "repository": "android_vendor_nxp-nfc_opensource_Nfc",
    "target_path": "vendor/nxp-nfc/opensource/Nfc"
- },
- {
-   "repository": "android_external_stlport",
-   "target_path": "external/stlport"
  }
 ]

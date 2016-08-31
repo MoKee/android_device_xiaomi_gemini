@@ -22,18 +22,18 @@ $(call inherit-product, vendor/mk/config/common_full_phone.mk)
 # Enhanced NFC
 $(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.mk.maintainer=dianlujitao
-
 PRODUCT_NAME := mk_gemini
 BOARD_VENDOR := Xiaomi
 TARGET_VENDOR := Xiaomi
 PRODUCT_DEVICE := gemini
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.mk.maintainer=wood
+
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE="gemini" \
-    PRODUCT_NAME="gemini"
-
-TARGET_VENDOR := gemini
+    PRODUCT_NAME="gemini" \
+    BUILD_FINGERPRINT="Xiaomi/gemini/gemini:6.0.1/MXB48T/V8.0.2.0.MAAMIDG:user/release-keys" \
+    PRIVATE_BUILD_DESC="gemini-user 6.0.1 MXB48T V8.0.2.0.MAAMIDG release-keys"

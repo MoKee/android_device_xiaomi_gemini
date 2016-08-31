@@ -33,8 +33,7 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
-# Dalvik/HWUI
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-dalvik-heap.mk)
+# HWUI overrides
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
 
 # Permissions
@@ -94,26 +93,20 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    libvolumelistener \
     libtinycompress \
+    libvolumelistener \
     tinymix
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
-    $(LOCAL_PATH)/audio/audio_effects.conf:system/etc/audio_effects.conf \
+    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+    $(LOCAL_PATH)/audio/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/audio/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/listen_platform_info.xml:system/etc/listen_platform_info.xml \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/audio/mixer_paths_i2s.xml:system/etc/mixer_paths_i2s.xml \
     $(LOCAL_PATH)/audio/mixer_paths_tasha.xml:system/etc/mixer_paths_tasha.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths_wcd9330.xml:system/etc/sound_trigger_mixer_paths_wcd9330.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
-    $(LOCAL_PATH)/audio/vendor/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/vendor/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
-    $(LOCAL_PATH)/audio/vendor/diracmobile.config:system/vendor/etc/diracmobile.config
+    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml
 
 # Browser
 PRODUCT_PACKAGES += \
@@ -122,18 +115,6 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     Snap
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/camera/imx298_chromatix.xml:system/etc/camera/imx298_chromatix.xml \
-    $(LOCAL_PATH)/configs/camera/imx298_liteon_chromatix.xml:system/etc/camera/imx298_liteon_chromatix.xml \
-    $(LOCAL_PATH)/configs/camera/imx298_semco_chromatix.xml:system/etc/camera/imx298_semco_chromatix.xml \
-    $(LOCAL_PATH)/configs/camera/msm8996_camera.xml:system/etc/camera/msm8996_camera.xml \
-    $(LOCAL_PATH)/configs/camera/ov4688_chromatix.xml:system/etc/camera/ov4688_chromatix.xml \
-    $(LOCAL_PATH)/configs/camera/ov4688_primax_chromatix.xml:system/etc/camera/ov4688_primax_chromatix.xml
-
-# Charger
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/sbin/chargeonlymode:root/sbin/chargeonlymode
 
 # Device config scripts
 PRODUCT_PACKAGES += \
@@ -150,7 +131,7 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc \
     init.qcom.sh
 
-# Connectivity Engine support (CNE)
+# CNE
 PRODUCT_PACKAGES += \
     libcnefeatureconfig
 
@@ -166,14 +147,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/calib.cfg:system/etc/calib.cfg
 
-# Override heap growth limit due to high display density on device
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapgrowthlimit=256m
-
-# DPM
+# Doze mode
 PRODUCT_PACKAGES += \
-    com.qti.dpmframework \
-    dpmapi
+    XiaomiDoze
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -181,26 +157,23 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8996
+    gps.msm8996 \
+    libcurl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:system/etc/flp.conf \
     $(LOCAL_PATH)/gps/etc/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/gps/etc/izat.conf:system/etc/izat.conf \
-    $(LOCAL_PATH)/gps/etc/lowi.conf:system/etc/lowi.conf \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf \
     $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/etc/xtwifi.conf
 
 # Input
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/idc/uinput-fpc.idc:system/usr/idc/uinput-fpc.idc \
-    $(LOCAL_PATH)/idc/usf_tsc.idc:system/usr/idc/usf_tsc.idc \
-    $(LOCAL_PATH)/idc/usf_tsc_ext.idc:system/usr/idc/usf_tsc_ext.idc \
-    $(LOCAL_PATH)/idc/usf_tsc_ptr.idc:system/usr/idc/usf_tsc_ptr.idc
+    $(LOCAL_PATH)/idc/uinput-fpc.idc:system/usr/idc/uinput-fpc.idc
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/atmel-maxtouch.kl:system/usr/keylayout/atmel-maxtouch.kl \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/keylayout/msm8996-tasha-mtp-snd-card_Button_Jack.kl:system/usr/keylayout/msm8996-tasha-mtp-snd-card_Button_Jack.kl \
     $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl \
     $(LOCAL_PATH)/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl \
     $(LOCAL_PATH)/keylayout/uinput-fpc.kl:system/usr/keylayout/uinput-fpc.kl
@@ -247,31 +220,25 @@ PRODUCT_PACKAGES += \
     libp61-jcop-kit \
     nfc_nci.nqx.default \
     NQNfcNci \
+    nqnfcee_access.xml \
+    nqnfcse_access.xml \
     Tag
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    $(LOCAL_PATH)/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
-    $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
+    $(LOCAL_PATH)/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
 
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libdivxdrmdecrypt \
-    libmm-omxcore \
     libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
-    libOmxSwVencMpeg4 \
-    libOmxSwVencHevc \
     libOmxVdec \
     libOmxVenc \
-    libOmxVdecHevc \
-    libOmxVidcCommon \
-    libOmxVdpp \
     libstagefrighthw
 
 # Performance
@@ -283,6 +250,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perf-profile4.conf:system/vendor/etc/perf-profile4.conf \
     $(LOCAL_PATH)/configs/perf-profile5.conf:system/vendor/etc/perf-profile5.conf \
     $(LOCAL_PATH)/configs/perf-profile6.conf:system/vendor/etc/perf-profile6.conf
+
 # Power
 PRODUCT_PACKAGES += \
     power.msm8996
@@ -291,12 +259,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     dsi_config.xml \
     netmgr_config.xml \
-    qmi_config.xml \
+    qmi_config.xml
+
+PRODUCT_PACKAGES += \
     libjson
+
 # RIL
 PRODUCT_PACKAGES += \
     librmnetctl \
-    libtinyxml2 \
     libxml2
 
 # Sensors
@@ -307,10 +277,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:system/etc/sensors/hals.conf \
     $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf
 
-#stlport
-PRODUCT_PACKAGES += \
-    libstlport
-
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine-8996.conf:system/etc/thermal-engine-8996.conf
@@ -320,12 +286,11 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     libqsap_sdk \
     libQWiFiSoftApCfg \
-    libwcnss_qmi \
     libwpa_client \
     hostapd \
+    readmac \
     wpa_supplicant \
-    wpa_supplicant.conf \
-    wcnss_service
+    wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
