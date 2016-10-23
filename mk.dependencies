@@ -1,5 +1,9 @@
 [
  {
+   "repository": "android_vendor_xiaomi_gemini",
+   "target_path": "vendor/xiaomi/gemini"
+ },
+ {
    "repository": "android_device_qcom_common",
    "target_path": "device/qcom/common"
  },
