@@ -24,9 +24,6 @@ $(call inherit-product, device/xiaomi/gemini/device.mk)
 # Inherit some common MK stuff.
 $(call inherit-product, vendor/mk/config/common_full_phone.mk)
 
-# Enhanced NFC
-$(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
-
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := mk_gemini
 PRODUCT_DEVICE := gemini
