@@ -26,6 +26,13 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     org.mokee.platform.internal
 
 LOCAL_PRIVILEGED_MODULE := true
+
+LOCAL_AAPT_FLAGS := --auto-add-overlay
+
+LOCAL_RESOURCE_DIR := \
+    $(LOCAL_PATH)/res \
+    $(LOCAL_PATH)/../../../../packages/resources/devicesettings/res
+
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_PACKAGE)
