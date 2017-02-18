@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -28,7 +29,6 @@ import com.android.internal.os.DeviceKeyHandler;
 import org.mokee.internal.util.FileUtils;
 
 import mokee.hardware.MKHardwareManager;
-import mokee.providers.MKSettings;
 
 public class KeyHandler implements DeviceKeyHandler {
 
@@ -85,7 +85,7 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     private boolean hasSetupCompleted() {
-        return MKSettings.Secure.getInt(mContext.getContentResolver(),
-                MKSettings.Secure.MK_SETUP_WIZARD_COMPLETED, 0) != 0;
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.USER_SETUP_COMPLETE, 0) != 0;
     }
 }
